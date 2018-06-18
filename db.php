@@ -13,7 +13,7 @@ try {
                                 stadt VARCHAR(32) NOT NULL,
                                 email VARCHAR(32) NOT NULL,
                                 status VARCHAR(32) NOT NULL,
-                                sid VARCHAR(32) NOT NULL;
+                                sid VARCHAR(32) NOT NULL,
                                 PRIMARY KEY (bid)
     );"))
     {
