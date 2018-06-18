@@ -127,17 +127,17 @@ $this->insert_pizza();
                 <div class="wahrenkorb">
                 <form action="Bestellung.php" id="form1" accept-charset="UTF-8" method="POST">
                     <select id="korb" name="warenkorb[]" size="5" multiple>      
-                    </select> </br>
-                    <label> Name: </br>
-                        <input type="text" name="name" size="30" maxlength="40" placeholder="Nachname"  />
-                    </label> </br>
-                    <label> Stadt: </br>
+                    </select> <p></p>
+                    <label> Name: <p></p>
+                        <input type="text" name="name" size="30" maxlength="40" placeholder="Name"  />
+                    </label> <p></p>
+                    <label> Stadt: <p></p>
                         <input type="text" name="stadt" size="30" maxlength="40" placeholder="Stadt"  />
-                    </label> </br>
-                    <label> Strasse: </br>
+                    </label> <p></p>
+                    <label> Strasse: <p></p>
                         <input type="text" name="strasse" size="30" maxlength="40" placeholder="Strasse"  />
-                    </label> </br>
-                    <label> Email: </br>
+                    </label> <p></p>
+                    <label> Email: <p></p>
                         <input type="text" name="email" size="30" maxlength="40" placeholder="Email"  />
                     </label>   
                 </form>
@@ -164,8 +164,9 @@ EOT;
             $preis = $this->pizzaPreis[$i];
             $pfad = $this->pizzaPfad[$i];
             echo <<<EOT
-            <div id="$id" data-name="$name" data-preis="$preis" onclick="addCart(this)"><img class="img" src="$pfad" /></div>
+            <div id="$id" data-name="$name" data-preis="$preis" onclick="addCart(this)"><img class="img" src="$pfad" alt="$name" /></div>
 EOT;
+            $id++;
         }
     }
     /**
@@ -212,14 +213,19 @@ EOT;
                 $content = $_POST['warenkorb'];
             }
 
+            $savename = $this->_database->real_escape_string($name);
+            $savestrasse = $this->_database->real_escape_string($strasse);
+            $savestadt = $this->_database->real_escape_string($stadt);
+            $saveemail = $this->_database->real_escape_string($email);
+            
             $sid = session_id();
             $bid = uniqid();
             $success = $this->_database->query("insert into bestellung values (
                                                     '$bid',
-                                                    '$name',
-                                                    '$strasse',
-                                                    '$stadt',
-                                                    '$email',
+                                                    '$savename',
+                                                    '$savestrasse',
+                                                    '$savestadt',
+                                                    '$saveemail',
                                                     'bestellt',
                                                     '$sid'
                                                 );"

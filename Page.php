@@ -86,6 +86,9 @@ abstract class Page
             <title>$headline</title>
             <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
             <script src="script.js"></script>
+EOT;
+        $this->insertStatus($headline);
+        echo <<<EOD
         </head>
         <body>
     <div class="webseite">
@@ -95,13 +98,20 @@ abstract class Page
         <div class="main">
             <nav class="menue roundedCorners white background">
                 <p><a href="Baecker.php" class="white">Baecker</a></p>
-                <p><a href="Bestellung.php"class="white">Bestellung</a></p>
-                <p><a href="Fahrer.php"class="white">Fahrer</a></p>
-                <p><a href="Status.php"class="white">Bestellstatus</a></p>
+                <p><a href="Bestellung.php" class="white">Bestellung</a></p>
+                <p><a href="Fahrer.php" class="white">Fahrer</a></p>
+                <p><a href="Status.php" class="white">Bestellstatus</a></p>
             </nav>
-EOT;
+EOD;
     }
 
+    protected function insertStatus($headline = "") {
+        if ($headline == "Bestellstatus") {
+            echo <<<EOT
+            <meta http-equiv="refresh" content="20">
+EOT;
+        }
+    }
     /**
      * Outputs the end of the HTML-file i.e. /body etc.
      *

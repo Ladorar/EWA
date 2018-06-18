@@ -121,7 +121,7 @@ class PageTemplate extends Page
 
     protected function generateEchoView() {
         echo <<<EOT
-        <meta http-equiv="refresh" content="20" >
+        
         <main class="inhalt roundedCorners white background">
         <p> Bestellstatus</p>
 EOT;
