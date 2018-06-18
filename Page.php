@@ -79,7 +79,6 @@ abstract class Page
         
         // to do: output common beginning of HTML code 
         // including the individual headline
-
         echo <<<EOT
         <!DOCTYPE html>
         <html lang="de">

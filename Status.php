@@ -1,4 +1,5 @@
 <?php	// UTF-8 marker äöüÄÖÜß€
+session_start();
 /**
  * Class PageTemplate for the exercises of the EWA lecture
  * Demonstrates use of PHP including class and OO.
@@ -35,6 +36,11 @@ class PageTemplate extends Page
 {
     // to do: declare reference variables for members 
     // representing substructures/blocks
+    protected $name;
+    protected $strasse;
+    protected $stadt;
+    protected $email;
+    protected $status;
     
     /**
      * Instantiates members (to be defined above).   
@@ -47,6 +53,13 @@ class PageTemplate extends Page
     {
         parent::__construct();
         // to do: instantiate members representing substructures/blocks
+
+        $name = array();
+        $strasse = array();
+        $stadt = array();
+        $email = array();
+        $status = array();
+
     }
     
     /**
@@ -70,6 +83,21 @@ class PageTemplate extends Page
     protected function getViewData()
     {
         // to do: fetch data for this view from the database
+        $sid = session_id();
+        $SQLAbfrage = "SELECT * FROM bestellung WHERE sid='$sid'";
+        $index = 0;
+        $Recordset = $this->_database->query($SQLAbfrage);
+
+        while($record = $Recordset->fetch_assoc()) {
+            $this->name[$index] = $record["name"];
+            $this->strasse[$index] = $record["strasse"];
+            $this->stadt[$index] = $record["stadt"];
+            $this->email[$index] = $record["email"];
+            $this->status[$index] = $record["status"];
+            $index = $index + 1;
+        }
+
+        $Recordset->free();
     }
     
     /**
@@ -84,10 +112,49 @@ class PageTemplate extends Page
     protected function generateView() 
     {
         $this->getViewData();
-        $this->generatePageHeader('to do: change headline');
+        $this->generatePageHeader('Bestellstatus');
         // to do: call generateView() for all members
         // to do: output view of this page
+        $this->generateEchoView();
         $this->generatePageFooter();
+    }
+
+    protected function generateEchoView() {
+        echo <<<EOT
+        <meta http-equiv="refresh" content="20" >
+        <main class="inhalt roundedCorners white background">
+        <p> Bestellstatus</p>
+EOT;
+        
+        $this->insertDetails();
+
+        echo <<<EOD
+                
+        </main>
+        </div>
+        <footer class="footer roundedCorners white background">
+
+        </footer>
+    </div>
+</body>
+EOD;
+    }
+
+    protected function insertDetails() {
+        $bestellstatus = $this->status[0]; 
+        $bestellname = $this->name[0];
+        $bestellstrasse = $this->strasse[0];
+        $bestellstadt = $this->stadt[0];
+        $bestellemail = $this->email[0];
+        echo <<<EOT
+        <p>Name: $bestellname</p>
+        <p>Stadt: $bestellstadt</p>
+        <p>Strasse: $bestellstrasse</p>
+        <p>Email: $bestellemail</p>
+        <p>Ihre Bestellung ist:</p>
+        <p>$bestellstatus</p>
+EOT;
+        
     }
     
     /**

@@ -1,4 +1,5 @@
 <?php	// UTF-8 marker äöüÄÖÜß€
+session_start();
 /**
  * Class PageTemplate for the exercises of the EWA lecture
  * Demonstrates use of PHP including class and OO.
@@ -39,6 +40,7 @@ class PageTemplate extends Page
     protected $pizzaName;
     protected $pizzaPfad;
     protected $pizzaPreis;
+    protected $head;
 
     /**
      * Instantiates members (to be defined above).   
@@ -104,7 +106,7 @@ class PageTemplate extends Page
     protected function generateView() 
     {
         $this->getViewData();
-        $this->generatePageHeader('Bestellung');
+        $this->generatePageHeader('Bestellen');
         // to do: call generateView() for all members
         // to do: output view of this page
         $this->generateEchoView();
@@ -123,17 +125,17 @@ $this->insert_pizza();
         echo <<<EOT
         </div>
                 <div class="wahrenkorb">
-                <form action="https://www.fbi.h-da.de/cgi-bin/Echo.pl" id="form1" accept-charset="UTF-8" method="POST">
-                    <select id="korb" name="warenkorb" size="5" >      
+                <form action="Bestellung.php" id="form1" accept-charset="UTF-8" method="POST">
+                    <select id="korb" name="warenkorb[]" size="5" multiple>      
                     </select> </br>
                     <label> Name: </br>
-                        <input type="text" name="last" size="30" maxlength="40" placeholder="Nachname"  />
+                        <input type="text" name="name" size="30" maxlength="40" placeholder="Nachname"  />
                     </label> </br>
                     <label> Stadt: </br>
-                        <input type="text" name="city" size="30" maxlength="40" placeholder="Stadt"  />
+                        <input type="text" name="stadt" size="30" maxlength="40" placeholder="Stadt"  />
                     </label> </br>
                     <label> Strasse: </br>
-                        <input type="text" name="street" size="30" maxlength="40" placeholder="Strasse"  />
+                        <input type="text" name="strasse" size="30" maxlength="40" placeholder="Strasse"  />
                     </label> </br>
                     <label> Email: </br>
                         <input type="text" name="email" size="30" maxlength="40" placeholder="Email"  />
@@ -177,8 +179,71 @@ EOT;
      */
     protected function processReceivedData() 
     {
-        parent::processReceivedData();
-        // to do: call processReceivedData() for all members
+        if ($_POST) {
+            parent::processReceivedData();
+            // to do: call processReceivedData() for all members
+
+            $name = 0;
+            $strasse = 0;
+            $stadt = 0;
+            $content = 0;
+            $email = 0;
+            $pizza = 0;
+            $sid = 0;
+
+            if (isset($_POST['name'])) {
+                $name = $_POST['name'];
+            }
+
+            if (isset($_POST['stadt'])) {
+                $stadt = $_POST['stadt'];
+            }
+
+
+            if (isset($_POST['strasse'])) {
+                $strasse = $_POST['strasse'];
+            }
+
+            if (isset($_POST['email'])) {
+                $email = $_POST['email'];
+            }
+
+            if (isset($_POST['warenkorb'])) {
+                $content = $_POST['warenkorb'];
+            }
+
+            $sid = session_id();
+            $bid = uniqid();
+            $success = $this->_database->query("insert into bestellung values (
+                                                    '$bid',
+                                                    '$name',
+                                                    '$strasse',
+                                                    '$stadt',
+                                                    '$email',
+                                                    'bestellt',
+                                                    '$sid'
+                                                );"
+                                            );
+            
+            foreach($content AS $name) {
+                $pid = uniqid();
+                $success = $this->_database->query("insert into bestelltepizza values (
+                                                    '$pid',
+                                                    '$bid',
+                                                    '$name'
+                                                );"
+                                            );
+                
+            }
+
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
+
+
+        }
+        
+        
+        
     }
 
     /**

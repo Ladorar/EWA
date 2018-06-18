@@ -17,8 +17,7 @@ body {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    margin-right: -10px;
-    margin-left: 10px;
+    justify-content: center;
 }
 
 .roundedCorners {
@@ -28,14 +27,15 @@ body {
     -o-border-radius: 5px;
 }
 
+.margintopbottom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .img {
     width: 250px;
 }
 
-
-.left {
-    text-align: left;
-}
 
 .background {
     background-color:rgba(0, 0, 0, 0.75);
@@ -46,6 +46,11 @@ body {
     font-size: 60px;
     font-weight: boid;
     font-family: Courier;
+}
+
+.wahrenkorb { 
+    width: 100%;
+    margin: 0 auto;
 }
 
 @media only screen and (min-width: 1015px) {
@@ -59,32 +64,39 @@ body {
     }
     .main {
         width: 980px;
+        display: flex;
     }
     .menue {
         float: left;
         width: 200px;
-        height: 500px;
         margin-top: 5px;
-        margin-bottom: 5px;
+        margin-right: 5px;
     }
     .inhalt {
         float: right;
         width: 775px;
-        height: 500px;
         margin-top: 5px;
-        margin-bottom: 5px;
     }
     .footer {
         width: 980px;
         height: 50px;
-        margin-top: 20px;
+        margin-top: 5px;
         clear: both;
+    }    
+    .form-control {
+        display: inline-block;
+        text-align: center;
+        width: 32%;
+        font-size: 14px;
+        line-height: 1.5;
+        color: black;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
     }
-    .wahrenkorb { 
-        width: 50%;
-        margin: 0 auto;
+    .pizza-width {
+        width: 33%;
     }
-    
 }
 
 @media only screen and (max-width: 1015px) {
@@ -98,32 +110,39 @@ body {
     }
     .main {
         width: 653px;
+        display: flex;
     }
     .menue {
         float: left;
         width: 133px;
-        height: 650px;
         margin-top: 5px;
-        margin-bottom: 5px;
+        margin-right: 5px;
     }
     .inhalt {
         float: right;
         width: 517px;
-        height: 650px;
         margin-top: 5px;
-        margin-bottom: 5px;
     }
     .footer {
         width: 653px;
         height: 50px;
-        margin-top: 20px;
+        margin-top: 5px;
         clear: both;
     }
-    .wahrenkorb { 
-        width: 50%;
-        margin: 0 auto;
+    .form-control {
+        display: inline-block;
+        text-align: center;
+        width: 47%;
+        font-size: 14px;
+        line-height: 1.5;
+        color: black;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
     }
-    
+    .pizza-width {
+        width: 50%;
+    }
 }
 
 @media only screen and (max-width: 690px) {
@@ -137,30 +156,37 @@ body {
     }
     .main {
         width: 400px;
+        display: flex;
     }
     .menue {
         float: left;
-        width: 80px;
-        height: 820px;
+        width: 85px;
         margin-top: 5px;
-        margin-bottom: 5px;
+        margin-right: 5px;
     }
     .inhalt {
         float: right;
         width: 310px;
-        height: 820px;
         margin-top: 5px;
-        margin-bottom: 5px;
     }
     .footer {
         width: 400px;
         height: 50px;
-        margin-top: 20px;
+        margin-top: 5px;
         clear: both;
     }
-    .wahrenkorb { 
-        width: 50%;
-        margin-left: 30px;
+    .form-control {
+        display: inline-block;
+        text-align: center;
+        width: 79%;
+        font-size: 14px;
+        line-height: 1.5;
+        color: black;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
     }
-    
+    .pizza-width {
+        width: 100%;
+    }    
 }
