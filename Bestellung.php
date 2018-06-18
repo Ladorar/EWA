@@ -141,8 +141,8 @@ $this->insert_pizza();
                 </form>
                 </div>
                 <div>
-                    <input type="submit" name="Bestellen" onclick="sel()"/>
-                    <button onclick="del()">Löschen</button>
+                    <input type="submit" name="Bestellen" onclick="bestellen()"/>
+                    <button onclick="deleteAll()">Löschen</button>
                 </div>
                 
             </main>
@@ -162,7 +162,7 @@ EOT;
             $preis = $this->pizzaPreis[$i];
             $pfad = $this->pizzaPfad[$i];
             echo <<<EOT
-            <div id="$id" data-name="$name" data-preis="$preis" onclick="addCart()"><img class="img" src="$pfad" /></div>
+            <div id="$id" data-name="$name" data-preis="$preis" onclick="addCart(this)"><img class="img" src="$pfad" /></div>
 EOT;
         }
     }

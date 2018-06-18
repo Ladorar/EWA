@@ -49,7 +49,7 @@ abstract class Page
      */
     protected function __construct() 
     {
-        $this->_database = new MySQLi("127.0.0.1", "root", "test", "pizzaservice");
+        $this->_database = new MySQLi("127.0.0.1", "root", "", "pizzaservice");
     }
     
     /**
@@ -86,6 +86,7 @@ abstract class Page
         <head>
             <title>$headline</title>
             <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+            <script src="script.js"></script>
         </head>
         <body>
     <div class="webseite">
